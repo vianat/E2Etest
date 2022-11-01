@@ -8,12 +8,9 @@ public class Base {
 
 		
 		WebDriverManager.chromedriver().setup();
-		
 		ChromeDriver driver = new ChromeDriver();
-		
 		driver.get("https://www.google.com/travel/flights");
-		
-		driver.close();
+		driver.quit();
 	}
 
 }
