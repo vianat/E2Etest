@@ -17,8 +17,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginSteps {
 
-	// TODO Auto-generated method stub
-
 	@Given("user is on login page")
 	public void user_is_on_login_page() throws IOException, InterruptedException {
 		WebDriverManager.chromedriver().setup();
@@ -51,5 +49,4 @@ public class LoginSteps {
 		System.out.println("Inside step- navigates to home page");
 	}
 	
-
 }
