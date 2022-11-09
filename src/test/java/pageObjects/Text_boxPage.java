@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class Text_boxPage {
 
-	public WebDriver driver;
+	public WebDriver driver = null;
 
 	By userName = By.id("userName");
 	By email = By.id("userEmail");
