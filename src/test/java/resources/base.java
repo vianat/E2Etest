@@ -18,14 +18,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class base {
 
-	public WebDriver driver;
+	public WebDriver driver = null;
 	public Properties prop;
 
 	public WebDriver initializeDriver() throws IOException {
 
 		prop = new Properties();
 		String dir = System.getProperty("user.home");
-        FileInputStream fis = new FileInputStream(dir+"\\eclipse-workspace\\E2Etest\\src\\main\\java\\resources\\data.properties");
+        FileInputStream fis = new FileInputStream(dir+"/eclipse-workspace/E2Etest/src/test/java/resources/data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
@@ -54,19 +54,4 @@ public class base {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		return driver;
 	}
-
-	public void getScreenshot(String testMethodName, WebDriver driver2){
-
-		String screenName = System.currentTimeMillis() + ".png";
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-		try{
-			FileHandler.copy(src, new File(System.getProperty("user.dir") 
-					+ "\\target\\Screenshots\\" + screenName + ""));
-		}
-		catch (IOException e){
-			System.out.println(e.getMessage());
-		}
-	}
-
 }
