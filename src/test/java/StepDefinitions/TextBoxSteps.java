@@ -32,21 +32,16 @@ public class TextBoxSteps extends base {
 	}
 	@Then("^Verify that (.+),(.+),(.+),(.+) are presents in response field")
 	public void verify_data(String uName, String email, String cAddress, String pAddress) throws Throwable {
-		String UN = driver.findElement(By.id("uName")).getText();
-
-		System.out.println(uName );
-//		assertEquals(UN, uName);
-		String EM = driver.findElement(By.id("userEmail")).getText();
-
-//		assertEquals(EM, uName);
-		String CA = driver.findElement(By.xpath("(//*[@id='currentAddress'])[2]")).getText();
-
-//		assertEquals(CA, uName);
-		String PA = driver.findElement(By.xpath("(//*[@id='permanentAddress'])[2]")).getText();
 		
-		System.out.println(uName + email +cAddress + pAddress);
-		System.out.println(UN + EM +CA + PA);
-//		assertEquals(PA, uName);
+		String UN = driver.findElement(By.id("name")).getText().split(":")[1];
+		String EM = driver.findElement(By.id("email")).getText().split(":")[1];
+		String CA = driver.findElement(By.xpath("(//*[@id='currentAddress'])[2]")).getText().split(":")[1];
+		String PA = driver.findElement(By.xpath("(//*[@id='permanentAddress'])[2]")).getText().split(":")[1];
+		
+		assertEquals(UN, uName);
+		assertEquals(EM, email);
+		assertEquals(CA, cAddress);
+		assertEquals(PA, pAddress);
 	}
 	@And("^close browsers$")
 	public void close_browsers() throws Throwable {

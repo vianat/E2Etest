@@ -24,9 +24,8 @@ public class base {
 	public WebDriver initializeDriver() throws IOException {
 
 		prop = new Properties();
-		FileInputStream fis = new FileInputStream(
-				"C:\\Users\\viana\\eclipse-workspace\\E2ETest\\src\\main\\java\\resources\\data.properties");
-
+		String dir = System.getProperty("user.home");
+        FileInputStream fis = new FileInputStream(dir+"\\eclipse-workspace\\E2Etest\\src\\main\\java\\resources\\data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
@@ -41,17 +40,17 @@ public class base {
 			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 
-		} else if (browserName.equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver",
-			System.getProperty("user.dir")+"\\drivers\\geckodriver-v0.31.0-win64.exe");
-			driver = new FirefoxDriver();
-			
-		} else if (browserName.equals("edge")) {
-			System.setProperty("webdriver.edge.driver",
-			System.getProperty("user.dir")+"\\E2EProject\\drivers\\msedgedriver104.exe");
-			driver = new EdgeDriver();
+//		} else if (browserName.equals("firefox")) {
+//			System.setProperty("webdriver.gecko.driver",
+//			System.getProperty("user.dir")+"\\drivers\\geckodriver-v0.31.0-win64.exe");
+//			driver = new FirefoxDriver();
+//			
+//		} else if (browserName.equals("edge")) {
+//			System.setProperty("webdriver.edge.driver",
+//			System.getProperty("user.dir")+"\\E2EProject\\drivers\\msedgedriver104.exe");
+//			driver = new EdgeDriver();
+//		}
 		}
-
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		return driver;
 	}
