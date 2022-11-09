@@ -30,13 +30,11 @@ public class LoginSteps {
 		File screenshotFile=((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(screenshotFile, new File("target/ScreenShots/"+screenshotFilename+".png"));
 		System.out.println(driver.getTitle());
-	
 	}
 
 	@When("user enters valid username and password")
 	public void user_enters_valid_username_and_password() {
 		System.out.println("Inside step- enters username and password");
-		
 	}
 
 	@When("clicks login button")
@@ -48,5 +46,4 @@ public class LoginSteps {
 	public void user_is_navigated_to_the_home_page() {
 		System.out.println("Inside step- navigates to home page");
 	}
-	
 }

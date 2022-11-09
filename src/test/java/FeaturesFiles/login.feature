@@ -1,7 +1,7 @@
 @SmokeFeature
 Feature: Feature to test login functionality
 
-@smokeTest
+@smokeTest1
   Scenario: Check if login is successfull with walid cridentials
     Given user is on login page
     When user enters valid username and password

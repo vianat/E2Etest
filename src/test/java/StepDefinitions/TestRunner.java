@@ -13,7 +13,5 @@ plugin= {"pretty", "html:target/htmlReports/report.html",
 
 tags="@smokeTest")
 
-
 public class TestRunner {
-
 }
