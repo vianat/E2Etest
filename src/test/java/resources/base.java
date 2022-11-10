@@ -18,10 +18,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class base {
 
-	public WebDriver driver = null;
-	public Properties prop;
+	public static WebDriver driver = null;
+	public static Properties prop;
 
-	public WebDriver initializeDriver() throws IOException {
+	public static WebDriver initializeDriver() throws IOException {
 
 		prop = new Properties();
 		String dir = System.getProperty("user.home");
@@ -32,12 +32,16 @@ public class base {
 		if (browserName.equals("chrome")) {
 			
 			ChromeOptions options = new ChromeOptions();
+//			options.addArguments("--log-level=3");
+//			options.addArguments("--silent");
+//			options.addArguments("--headless");
 			WebDriverManager.chromedriver().setup();
 		
 //			run without UI
 			if (browserName.contains("headless")){options.addArguments("headless");}
 			
 			driver = new ChromeDriver(options);
+			driver.manage().deleteAllCookies();
 			driver.manage().window().maximize();
 
 //		} else if (browserName.equals("firefox")) {
@@ -51,7 +55,11 @@ public class base {
 //			driver = new EdgeDriver();
 //		}
 		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		return driver;
+	}
+	public static WebDriver navigateTo(WebDriver driver, String url) {
+			driver.get(url);
 		return driver;
 	}
 }
