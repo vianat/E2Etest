@@ -1,6 +1,6 @@
 Feature: Feature to test checkbox functionality
 
-  @smokeTest2
+  @smokeTest
   Scenario: Check if check box works properly
     Given user clicks on toggle
     When clicks on checkbox

@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,7 +10,6 @@ public class CheckboxSteps extends base {
 	Check_boxPage ch;
 
 	@Given("user clicks on toggle")
-
 	public void user_clicks_on_toggle() {
 		navigateTo(driver, "http://demoqa.com/checkbox");
 		ch = new Check_boxPage(driver);
@@ -27,5 +25,4 @@ public class CheckboxSteps extends base {
 	public void you_should_be_able_to_see_what_checkbox_you_have_selected() {
 		System.out.println("You are on checkbox page");
 	}
-
 }

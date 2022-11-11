@@ -1,12 +1,15 @@
-package resources;
+package StepDefinitions;
+
+import java.io.IOException;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import java.io.IOException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import resources.base;
 
 public class Hooks {
 
@@ -16,11 +19,13 @@ public class Hooks {
 
 	@Before
 	public void start() throws IOException {
+		System.out.println("*************************** HOOK BEFORE *****************");
 		driver = base.initializeDriver();
 	}
 
 	@After
 	public void quit(Scenario scenario) {
+		System.out.println("**************************** HOOK AFTER ******************");
 
 		if (scenario.isFailed()) {
 			byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
