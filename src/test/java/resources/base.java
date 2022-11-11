@@ -25,21 +25,24 @@ public class base {
 
 		prop = new Properties();
 		String dir = System.getProperty("user.home");
-        FileInputStream fis = new FileInputStream(dir+"/eclipse-workspace/E2Etest/src/test/java/resources/data.properties");
+		FileInputStream fis = new FileInputStream(
+				dir + "/eclipse-workspace/E2Etest/src/test/java/resources/data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
-			
+
 			ChromeOptions options = new ChromeOptions();
 //			options.addArguments("--log-level=3");
 //			options.addArguments("--silent");
 //			options.addArguments("--headless");
 			WebDriverManager.chromedriver().setup();
-		
+
 //			run without UI
-			if (browserName.contains("headless")){options.addArguments("headless");}
-			
+			if (browserName.contains("headless")) {
+				options.addArguments("headless");
+			}
+
 			driver = new ChromeDriver(options);
 			driver.manage().deleteAllCookies();
 			driver.manage().window().maximize();
@@ -58,8 +61,14 @@ public class base {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		return driver;
 	}
+
 	public static WebDriver navigateTo(WebDriver driver, String url) {
-			driver.get(url);
+		driver.get(url);
 		return driver;
+	}
+
+	public static void tearDown() {
+		driver.quit();
+
 	}
 }

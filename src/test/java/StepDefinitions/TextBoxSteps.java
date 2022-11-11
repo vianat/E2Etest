@@ -6,20 +6,14 @@ import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import pageObjects.Text_boxPage;
 import resources.base;
 
 public class TextBoxSteps extends base {
-	
-	@BeforeAll
-	public static void initialize_chrome() throws Throwable {
-		driver = initializeDriver();
-		navigateTo(driver, "http://demoqa.com/text-box");
-	}
-	
+
 	@Given("^Enters (.+),(.+),(.+),(.+) in all text-boxes inputs$")
 	public void fill_all_dataFields(String uName, String email, String cAddress, String pAddress) throws Throwable {
+		navigateTo(driver, "http://demoqa.com/text-box");
 		Text_boxPage tp = new Text_boxPage(driver);
 		tp.userName().sendKeys(uName);
 		tp.email().sendKeys(email);
@@ -42,8 +36,5 @@ public class TextBoxSteps extends base {
 		assertEquals(PA, pAddress);
 	}
 	
-	@AfterAll
-	public static void close_browsers() throws Throwable {
-		driver.quit();
-	}
+
 }
