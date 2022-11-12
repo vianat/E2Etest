@@ -23,15 +23,14 @@ public class CheckboxSteps extends base {
 
 	@When("clicks on checkbox")
 	public void clicks_on_checkbox() {
-		System.out.println("pered"+ch.home().isSelected());
 		ch.home().click();
-		System.out.println("posle"+ch.home().isSelected());
-		
+
 	}
 
 	@Then("you should be able to see what checkbox you have selected")
 	public void you_should_be_able_to_see_what_checkbox_you_have_selected() {
-		System.out.println("********"+ch.home().isSelected());
-		assertEquals(ch.home().isSelected(),false);
-		}
+		String actual = ch.home().getAttribute("class");
+		String expected = "rct-icon rct-icon-check";
+		assertEquals(actual, expected);
+	}
 }

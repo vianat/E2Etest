@@ -9,7 +9,7 @@ public class Check_boxPage {
 	public WebDriver driver = null;
 
 	By toggle = By.xpath("//button[@title='Toggle']");
-	By home = By.xpath("//span[@class='rct-checkbox']");
+	By home = By.xpath("//span[@class='rct-checkbox']//*[name()='svg']");
 	By response = By.id("result");
 	
 	public Check_boxPage(WebDriver driver) {
