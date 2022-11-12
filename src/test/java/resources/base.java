@@ -1,13 +1,18 @@
 package resources;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class base {
@@ -59,6 +64,14 @@ public class base {
 	public static WebDriver navigateTo(WebDriver driver, String url) {
 		driver.get(url);
 		return driver;
+	}
+	public static void waitUntilElementToAppear(WebDriver driver, WebElement el){
+		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOfElementLocated((By) el));
+	}
+	public static void waitUntilElementToDisAppear(WebDriver driver, WebElement el){
+		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.invisibilityOf(el));
 	}
 
 	public static void tearDown() {
