@@ -1,7 +1,10 @@
 package StepDefinitions;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,17 +22,20 @@ public class Hooks {
 
 	@Before
 	public void start() throws IOException {
-		System.out.println("*************************** HOOK BEFORE *****************");
+
 		driver = base.initializeDriver();
 	}
 
 	@After
-	public void quit(Scenario scenario) {
-		System.out.println("**************************** HOOK AFTER ******************");
+	public void quit(Scenario scenario) throws IOException {
 
 		if (scenario.isFailed()) {
-			byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-			scenario.attach(screenshot, "target/ScreenShots/", scenario.getName());
+//			byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//			scenario.attach(screenshot, "target/ScreenShots/", scenario.getName());
+			Date currentdate = new Date();
+			String screenshotFilename = currentdate.toString().replace(" ", "-").replace(":", "-");
+			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshotFile, new File("target/ScreenShots/" + screenshotFilename + ".png"));
 		}
 
 		base.tearDown();
