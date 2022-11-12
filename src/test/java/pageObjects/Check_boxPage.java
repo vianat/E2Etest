@@ -10,6 +10,7 @@ public class Check_boxPage {
 
 	By toggle = By.xpath("//button[@title='Toggle']");
 	By home = By.xpath("//span[@class='rct-checkbox']");
+	By response = By.id("result");
 	
 	public Check_boxPage(WebDriver driver) {
 		this.driver = driver;
@@ -21,5 +22,7 @@ public class Check_boxPage {
 	public WebElement home() {
 		return driver.findElement(home);
 	}
-
+	public WebElement hometxt() {
+		return driver.findElement(response);
+	}
 }
