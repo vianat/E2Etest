@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -76,5 +76,9 @@ public class base {
 
 	public static void tearDown() {
 		driver.quit();
+	}
+	public static void mouseClickOnElement(WebDriver driver, WebElement element) {
+		 Actions actions = new Actions(driver);
+		 actions.moveToElement(element).click().perform();
 	}
 }
