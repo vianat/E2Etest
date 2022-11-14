@@ -1,6 +1,6 @@
 Feature: Feature to test radio button functionality
 
-  @Regression
+  @smoke
   Scenario: Check if radio button works properly
   	I navigate to "http://demoqa.com/checkbox"
     Given user is on webpage

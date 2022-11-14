@@ -1,7 +1,7 @@
 @SmokeFeature
 Feature: Feature of text-box functionality
 
-  @smokeTest
+  @smoke
   Scenario: If text-box works properly
   	I navigate to "http://demoqa.com/text-box"
   	
