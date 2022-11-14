@@ -1,6 +1,6 @@
 Feature: Feature to test checkbox functionality
 
-  @smokeTest2
+  @smoke
   Scenario: Check if check box works properly
   	I navigate to "http://demoqa.com/checkbox"
     Given user clicks on toggle

@@ -1,24 +1,17 @@
 package StepDefinitions;
 
 import static org.testng.Assert.assertEquals;
-import java.time.Duration;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import net.bytebuddy.asm.Advice.OffsetMapping.Target.AbstractReadOnlyAdapter;
 import pageObjects.TablePage;
-import pageObjects.Text_boxPage;
 import resources.base;
 
-public class SwitchToIframeTest extends base {
+@Test
+public class TableTest extends base {
+	
 	TablePage tp = new TablePage(driver);
 	
 	@Given("Click [Add] button")

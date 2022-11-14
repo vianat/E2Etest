@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Text_boxPage {
+import resources.base;
 
-	public WebDriver driver = null;
+public class Text_boxPage  extends base{
 
 	By userName = By.id("userName");
 	By email = By.id("userEmail");
@@ -15,9 +15,8 @@ public class Text_boxPage {
 	By submitBtn = By.id("submit");
 
 	public Text_boxPage(WebDriver driver) {
-		this.driver = driver;
+		driver = base.driver;
 	}
-
 	public WebElement userName() {
 		return driver.findElement(userName);
 	}

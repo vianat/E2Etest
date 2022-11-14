@@ -2,22 +2,23 @@ package StepDefinitions;
 
 import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
+import org.testng.annotations.Test;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import net.bytebuddy.asm.Advice.OffsetMapping.Target.AbstractReadOnlyAdapter;
 import pageObjects.Text_boxPage;
 import resources.base;
 
-public class TextBoxSteps extends base {
-
+@Test
+public class TextBoxTest extends base {
+	
+	Text_boxPage tp = new Text_boxPage(driver);
+	
 	@Given("^Enters (.+),(.+),(.+),(.+) in text-boxes$")
 	public void fill_all_dataFields(String uName, String email, String cAddress, String pAddress) throws Throwable {
 
 		base.navigateTo(driver, "http://demoqa.com/text-box");
-		Text_boxPage tp = new Text_boxPage(driver);
+
 		tp.userName().sendKeys(uName);
 		tp.email().sendKeys(email);
 		tp.currentAddress().sendKeys(cAddress);

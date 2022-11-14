@@ -5,13 +5,17 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/FeaturesFiles", glue = { "StepDefinitions" },
-monochrome=true,
-plugin= {"pretty", "html:target/htmlReports/report.html",
-		"json:target/JsonReports/report.json",
-		"junit:target/JunitReports/report.xml"},
+@CucumberOptions(
+									features = "src/test/java/FeaturesFiles", 
+									glue = { "StepDefinitions" },
+									monochrome=true,
+									dryRun = false,
+									plugin= {
+											"pretty", "html:target/htmlReports/report.html",
+											"json:target/JsonReports/report.json",
+									"junit:target/JunitReports/report.xml"},
 
-tags="@Regression")
+tags="@smoke")
 
 public class TestRunner {
 }

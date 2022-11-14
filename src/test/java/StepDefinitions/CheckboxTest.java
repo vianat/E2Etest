@@ -1,19 +1,18 @@
 package StepDefinitions;
 
 import static org.testng.Assert.assertEquals;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
+import org.testng.annotations.Test;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.Check_boxPage;
 import resources.base;
 
-public class CheckboxSteps extends base {
-	Check_boxPage ch;
+@Test
+public class CheckboxTest extends base {
 
+	Check_boxPage ch = new Check_boxPage(driver);
+	
 	@Given("user clicks on toggle")
 	public void user_clicks_on_toggle() {
 		navigateTo(driver, "http://demoqa.com/checkbox");
@@ -24,7 +23,6 @@ public class CheckboxSteps extends base {
 	@When("clicks on checkbox")
 	public void clicks_on_checkbox() {
 		ch.home().click();
-
 	}
 
 	@Then("you should be able to see what checkbox you have selected")

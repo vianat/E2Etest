@@ -1,7 +1,7 @@
 @SmokeFeature
 Feature: Feature of table functionality
 
-  @smokeTest3
+  @smoke
   Scenario: Add new row in table
   	I navigate to "https://demoqa.com/webtables"
   	

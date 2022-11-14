@@ -1,6 +1,5 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,13 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import resources.base;
 
 public class TablePage  extends base{
-	
-	WebDriver driver = null;
-
-	public TablePage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
 	
 	@FindBy(xpath ="//button[@id='addNewRecordButton']") public WebElement addBtn;
 	@FindBy(xpath ="//input[@id='firstName']") public WebElement firstName;
@@ -26,6 +18,10 @@ public class TablePage  extends base{
 	@FindBy(xpath ="//button[@id='submit']") public WebElement submit;
 	@FindBy(xpath ="//div[@role='dialog']") public WebElement dialog;
 	
+	public TablePage(WebDriver driver) {
+		driver = base.driver;
+		PageFactory.initElements(driver, this);
+	}
 	public  void insertText (WebElement el, String text) {
 		el.sendKeys(text);
 	}
