@@ -15,18 +15,6 @@ public class ActionsTest extends base {
 	
 	ButtonsPage bp = new ButtonsPage(driver);
 	
-//	@Given("^Do <click> click on the <btn> button")
-//	public void do_click_on_the_button(String click, String btn) {
-//		if(click.equals("dynamic")) {
-//			dynamicClickOnElement(driver, bp.clickMeBtn);
-//		}
-//		else if(click.equals("right")) {
-//			rightClickOnElement(driver, bp.rightClickBtn);
-//		}
-//		else if(click.equals("double")) {
-//			doubleClickOnElement(driver, bp.doubleClickBtn);
-//		} 
-//	}
 	@Given("Do {string} click on the {string} button")
 	public void do_click_on_the_button(String string, String string2) throws InterruptedException {
 		base.navigateTo(driver, "http://demoqa.com/buttons");

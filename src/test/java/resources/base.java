@@ -27,7 +27,6 @@ public class base {
 	public static void dynamicClickOnElement(WebDriver driver, WebElement element) {
 		 Actions actions = new Actions(driver);
 		 actions.moveToElement(element).click().perform();
-//		 element.click();
 	}
 	public static void rightClickOnElement(WebDriver driver, WebElement element) {
 		 Actions actions = new Actions(driver);
