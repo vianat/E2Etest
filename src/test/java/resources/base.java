@@ -24,8 +24,20 @@ public class base {
 		wait.until(ExpectedConditions.invisibilityOf(el));
 	}
 
-	public static void mouseClickOnElement(WebDriver driver, WebElement element) {
+	public static void dynamicClickOnElement(WebDriver driver, WebElement element) {
 		 Actions actions = new Actions(driver);
 		 actions.moveToElement(element).click().perform();
+//		 element.click();
+	}
+	public static void rightClickOnElement(WebDriver driver, WebElement element) {
+		 Actions actions = new Actions(driver);
+		 actions.contextClick(element).perform();
+	}
+	public static void doubleClickOnElement(WebDriver driver, WebElement element) {
+		 Actions actions = new Actions(driver);
+		 actions.doubleClick(element).perform();
+	}
+	public static String getTextFromElement (WebDriver driver, WebElement el) {
+		return el.getText();
 	}
 }

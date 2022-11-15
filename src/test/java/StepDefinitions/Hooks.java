@@ -57,7 +57,7 @@ public class Hooks extends base {
 //			driver = new EdgeDriver();
 //		}
 		}
-//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 	}
 
 	@After

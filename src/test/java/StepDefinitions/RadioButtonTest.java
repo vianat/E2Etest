@@ -26,7 +26,7 @@ public class RadioButtonTest extends base {
 	public void clicks_on_radio_button() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		radio = driver.findElement(By.id("yesRadio"));
-		mouseClickOnElement(driver, radio);
+		dynamicClickOnElement(driver, radio);
 	}
 
 	@Then("you should be able to see button is selected")
