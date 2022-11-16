@@ -4,6 +4,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,4 +40,15 @@ public class base {
 	public static String getTextFromElement (WebDriver driver, WebElement el) {
 		return el.getText();
 	}
-}
+	public static void switchToNewTab (WebDriver driver) {
+		String originalWindow = driver.getWindowHandle();
+		assert driver.getWindowHandles().size() == 1;
+		for (String windowHandle : driver.getWindowHandles()) {
+		    if(!originalWindow.contentEquals(windowHandle)) {
+		        driver.switchTo().window(windowHandle);
+		        break;
+		    }
+		   
+		}
+	}
+		}

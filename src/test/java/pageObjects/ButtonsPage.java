@@ -12,7 +12,7 @@ public class ButtonsPage extends base{
 	@FindBy(css = "#rightClickBtn") public WebElement rightClickBtn;
 	@FindBy(id = "doubleClickBtn") public WebElement doubleClickBtn;
 	
-	@FindBy(id = "dynamicClickMessage") public WebElement dynamicClickMessage;
+	@FindBy(xpath = "//p[@id='dynamicClickMessage']") public WebElement dynamicClickMessage;
 	@FindBy(id = "rightClickMessage") public WebElement rightClickMessage;
 	@FindBy(id = "doubleClickMessage") public WebElement doubleClickMessage;
 	

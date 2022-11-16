@@ -13,7 +13,7 @@ public class CheckboxTest extends base {
 
 	Check_boxPage ch = new Check_boxPage(driver);
 	
-	@Given("user clicks on toggle")
+	@Given("^user clicks on toggle")
 	public void user_clicks_on_toggle() {
 		navigateTo(driver, "http://demoqa.com/checkbox");
 		ch = new Check_boxPage(driver);
