@@ -3,8 +3,7 @@ package StepDefinitions;
 import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import io.cucumber.java.en.Given;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import pageObjects.TablePage;
 import resources.base;
@@ -14,12 +13,10 @@ public class TableTest extends base {
 	
 	TablePage tp = new TablePage(driver);
 	
-	@Given("Click [Add] button")
+	@And("Click [Add] button")
 	public void click_add_button() throws InterruptedException {
-		
-		base.navigateTo(driver, "https://demoqa.com/webtables");
+	
 		tp.clickBtn(tp.addBtn);
-		
 //		waitUntilElementToAppear(driver, tp.dialog);
 	}
 	

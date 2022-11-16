@@ -12,7 +12,6 @@ public class WindowsPage extends base{
 	@FindBy(css = "#windowButton") public WebElement windowBtn;
 	@FindBy(id = "messageWindowButton") public WebElement messageBtn;
 	
-
 	public WindowsPage(WebDriver driver) {
 		driver = base.driver;
 		PageFactory.initElements(driver, this);

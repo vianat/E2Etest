@@ -3,9 +3,9 @@ Feature: Feature of table functionality
 
   @smoke
   Scenario: Add new row in table
-  	I navigate to "https://demoqa.com/webtables"
   	
-    Given Click [Add] button
+  	Given I navigate to "https://demoqa.com/webtables"
+    And Click [Add] button
     Then Fill all inputs fields <fname>,<lname>,<email>,<age> ,<salary>,<dep>
     And Click submit button
     Then Check that name is present in table <fname>

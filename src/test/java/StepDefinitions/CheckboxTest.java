@@ -2,7 +2,7 @@ package StepDefinitions;
 
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
-import io.cucumber.java.en.Given;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.Check_boxPage;
@@ -13,10 +13,8 @@ public class CheckboxTest extends base {
 
 	Check_boxPage ch = new Check_boxPage(driver);
 	
-	@Given("^user clicks on toggle")
+	@And("^user clicks on toggle")
 	public void user_clicks_on_toggle() {
-		navigateTo(driver, "http://demoqa.com/checkbox");
-		ch = new Check_boxPage(driver);
 		ch.toggle().click();
 	}
 
