@@ -34,7 +34,7 @@ public class Hooks extends base {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--log-level=3");
 //			options.addArguments("--silent");
-			options.addArguments("--headless");
+		//	options.addArguments("--headless");
 			WebDriverManager.chromedriver().setup();
 
 //			run without UI
