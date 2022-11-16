@@ -12,7 +12,7 @@ public class Text_boxPage  extends base{
 	By email = By.id("userEmail");
 	By currentAddress = By.id("currentAddress");
 	By permanentAddress = By.id("permanentAddress");
-	By submitBtn = By.id("submit");
+	By submitBtn = By.xpath("//button[@id='submit']");
 
 	public Text_boxPage(WebDriver driver) {
 		driver = base.driver;

@@ -3,7 +3,6 @@ package StepDefinitions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
 import org.apache.commons.io.FileUtils;
@@ -57,7 +56,6 @@ public class Hooks extends base {
 //			driver = new EdgeDriver();
 //		}
 		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 	}
 
 	@After

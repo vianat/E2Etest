@@ -4,30 +4,32 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class base {
+	
 	public static WebDriver driver;
 	
 	public static WebDriver navigateTo(WebDriver driver, String url) {
 		driver.get(url);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		return driver;
 	}
 	public static void waitUntilElementToAppear(WebDriver driver, WebElement el){
-		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOfElementLocated((By) el));
 	}
 	public static void waitUntilElementToDisAppear(WebDriver driver, WebElement el){
-		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.invisibilityOf(el));
 	}
 
 	public static void dynamicClickOnElement(WebDriver driver, WebElement element) {
-		 Actions actions = new Actions(driver);
-		 actions.moveToElement(element).click().perform();
+//		 Actions actions = new Actions(driver);
+//		 actions.moveToElement(element).click().perform();
+		 element.click();
 	}
 	public static void rightClickOnElement(WebDriver driver, WebElement element) {
 		 Actions actions = new Actions(driver);
@@ -51,4 +53,4 @@ public class base {
 		   
 		}
 	}
-		}
+}
