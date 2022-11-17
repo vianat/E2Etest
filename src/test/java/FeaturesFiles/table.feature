@@ -3,7 +3,6 @@ Feature: Feature of table functionality
 
   @smoke
   Scenario: Add new row in table
-  	
   	Given I navigate to "https://demoqa.com/webtables"
     And Click [Add] button
     Then Fill all inputs fields <fname>,<lname>,<email>,<age> ,<salary>,<dep>
