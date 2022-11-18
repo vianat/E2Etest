@@ -33,7 +33,7 @@ public class Hooks extends base {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--log-level=3");
 //			options.addArguments("--silent");
-		//	options.addArguments("--headless");
+			options.addArguments("--headless");
 			WebDriverManager.chromedriver().setup();
 
 //			run without UI
@@ -64,13 +64,12 @@ public class Hooks extends base {
 		System.out.println(scenario.getStatus());
 
 		if (scenario.isFailed()) {
-			Date currentdate = new Date();
-			String screenshotFilename = currentdate.toString().replace(" ", "-").replace(":", "-");
+			Date date = new Date();
+			String screenshotFilename = date.toString().replace(" ", "-").replace(":", "-");
 			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenshotFile, new File("target/ScreenShots/" + screenshotFilename + ".png"));
 		}
 
 		driver.quit();
 	}
-
 }
