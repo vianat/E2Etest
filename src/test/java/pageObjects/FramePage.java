@@ -9,12 +9,14 @@ import resources.base;
 public class FramePage extends base{
 
 	public WebElement getFrame(String name) {
-		if (name.equals("frame")) return frame;
-		else return frame2;
+		if (name.equals("frame1")) return frame1;
+		if(name.equals("child")) return child;
+		return frame2;
 	}
 
-	@FindBy(id = "frame1") public WebElement frame;
-	@FindBy(css = "#frame2") public WebElement frame2;
+	@FindBy(id = "frame1") public WebElement frame1;
+	@FindBy(id = "frame2") public WebElement frame2;
+	@FindBy(tagName = "iframe") public WebElement child;
 
 	public FramePage(WebDriver driver) {
 		driver = base.driver;

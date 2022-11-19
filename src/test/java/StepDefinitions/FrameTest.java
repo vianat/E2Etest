@@ -16,13 +16,14 @@ public class FrameTest extends base {
 	String actual;
 
 	@When("Switch to frame")
-	public void switchToFrame(String name) {
+	public void switchToFrame(String name) throws InterruptedException {
+		Thread.sleep(3000);
 		driver.switchTo().frame(fp.getFrame(name));
 	}
 
 	@And("Get text from frame")
 	public void getTextFromFrame() {
-		actual = driver.findElement(By.tagName("h1")).getText();
+		actual = driver.findElement(By.tagName("body")).getText();
 	}
 
 	@Then("Verify text {string} is present in frame")
