@@ -46,8 +46,6 @@ public class WindowsTest extends base {
 		} else {
 			actual = driver.findElement(By.xpath("/html[1]/body[1]")).getText();
 		}
-		System.out.println("****"+actual);
-		System.out.println("****"+string);
 		assertEquals(actual, string);
 	}
 
