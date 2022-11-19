@@ -36,7 +36,7 @@ public class Hooks extends base {
 			options.addArguments("--headless");
 			WebDriverManager.chromedriver().setup();
 
-//			run without UI
+//			run without UIgi
 			if (browserName.contains("headless")) {
 				options.addArguments("headless");
 			}
