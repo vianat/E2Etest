@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import io.cucumber.java.After;
@@ -15,6 +16,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import resources.base;
+
+import static resources.BaseClass.initPageList;
+import static resources.BaseClass.threadDriver;
 
 public class Hooks extends base {
 
@@ -55,6 +59,7 @@ public class Hooks extends base {
 //			System.getProperty("user.dir")+"\\E2EProject\\drivers\\msedgedriver104.exe");
 //			driver = new EdgeDriver();
 //		}
+			initPageList();
 		}
 	}
 
@@ -69,7 +74,13 @@ public class Hooks extends base {
 			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenshotFile, new File("target/ScreenShots/" + screenshotFilename + ".png"));
 		}
-
 		driver.quit();
+
+//		if (threadDriver.get() != null) {
+//			threadDriver.get().quit();
+//			WebDriver driver = threadDriver.get();
+//			driver = null;
+//			threadDriver.set(null);
+//		}
 	}
 }
