@@ -16,6 +16,5 @@ import io.cucumber.junit.CucumberOptions;
 											"junit:target/JunitReports/report.xml"},
 
 tags="@smoke")
-
 public class TestRunner {
 }

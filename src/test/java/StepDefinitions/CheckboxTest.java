@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import pageObjects.Check_boxPage;
 import resources.base;
 
-@Test
 public class CheckboxTest extends base {
 
 	Check_boxPage ch = new Check_boxPage(driver);

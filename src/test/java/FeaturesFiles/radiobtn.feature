@@ -1,3 +1,4 @@
+@SmokeFeature
 Feature: Feature to test radio button functionality
 
   @smoke

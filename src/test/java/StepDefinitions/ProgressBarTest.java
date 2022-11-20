@@ -9,7 +9,6 @@ import resources.base;
 
 import java.time.Duration;
 
-@Test
 public class ProgressBarTest extends base {
 
     ProgressBarPage pbp = new ProgressBarPage(driver);

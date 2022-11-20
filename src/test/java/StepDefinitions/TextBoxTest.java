@@ -8,7 +8,6 @@ import io.cucumber.java.en.Then;
 import pageObjects.Text_boxPage;
 import resources.base;
 
-@Test
 public class TextBoxTest extends base {
 	
 	Text_boxPage tp = new Text_boxPage(driver);

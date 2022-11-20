@@ -1,18 +1,18 @@
 package StepDefinitions;
 
 import static org.testng.Assert.assertEquals;
-import org.testng.annotations.Test;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.jupiter.api.Test;
 import pageObjects.ButtonsPage;
 import resources.base;
 
-@Test
 public class ActionsTest extends base {
 	
 	ButtonsPage bp = new ButtonsPage(driver);
 	
+	@Test
 	@Given("I navigate to {string}")
 	public void I_navigate_to(String string) throws InterruptedException {
 		base.navigateTo(driver, string);

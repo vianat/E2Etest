@@ -13,7 +13,6 @@ import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Test
 public class CalendarTest extends base {
 
 	CalendarPage cp = new CalendarPage(driver);

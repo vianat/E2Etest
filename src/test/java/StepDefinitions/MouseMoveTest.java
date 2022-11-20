@@ -11,19 +11,20 @@ import pageObjects.ResizePage;
 import resources.base;
 import java.awt.*;
 
-@Test
 public class MouseMoveTest extends base {
 	
 	ResizePage rp = new ResizePage(driver);
-	Actions actions = new Actions(driver);
+
 	@When("Click and hold")
 	public void click_and_hold() {
+		Actions actions = new Actions(driver);
 		actions.moveToElement(rp.el);
 		actions.clickAndHold().perform();
 	}
 
 	@And("Move to coordinate {int} and {int}")
 	public void moveToCoordinateAnd(int x, int y) throws AWTException {
+		Actions actions = new Actions(driver);
 		Point coordinates = driver.findElement(By.xpath("//div[@id='resizable']//span[@class='react-resizable-handle react-resizable-handle-se']")).getLocation();
 		Robot robot = new Robot();
 		robot.mouseMove(coordinates.getX()+x,coordinates.getY()+y);

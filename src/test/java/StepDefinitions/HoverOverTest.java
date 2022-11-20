@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pageObjects.HoverOverPage;
 import resources.base;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@Test
 public class HoverOverTest extends base {
 	HoverOverPage hop = new HoverOverPage(driver);
 	@When("Move to {string} button")

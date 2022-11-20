@@ -9,7 +9,6 @@ import pageObjects.FramePage;
 import resources.base;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Test
 public class FrameTest extends base {
 
 	FramePage fp = new FramePage(driver);

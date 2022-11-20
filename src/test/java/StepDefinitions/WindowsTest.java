@@ -12,7 +12,6 @@ import io.cucumber.java.en.Then;
 import pageObjects.WindowsPage;
 import resources.base;
 
-@Test
 public class WindowsTest extends base {
 	
 	Scenario scenario;

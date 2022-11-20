@@ -10,7 +10,6 @@ import io.cucumber.java.en.Then;
 import pageObjects.AlertPage;
 import resources.base;
 
-@Test
 public class AlertTest extends base {
 
 	AlertPage ap = new AlertPage(driver);

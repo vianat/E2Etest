@@ -8,7 +8,6 @@ import io.cucumber.java.en.Then;
 import pageObjects.TablePage;
 import resources.base;
 
-@Test
 public class TableTest extends base {
 	
 	TablePage tp = new TablePage(driver);

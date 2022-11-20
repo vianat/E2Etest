@@ -10,7 +10,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import resources.base;
 
-@Test
 public class RadioButtonTest extends base {
 
 	WebElement radio;
