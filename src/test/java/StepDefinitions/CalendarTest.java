@@ -7,8 +7,6 @@ import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 import pageObjects.CalendarPage;
 import resources.base;
-
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringJoiner;
@@ -20,7 +18,6 @@ public class CalendarTest extends base {
 
 	CalendarPage cp = new CalendarPage(driver);
 	String[] sendDate;
-	String expected;
 
 	@When("click on input [Date And Time]")
 	public void clickOnInputDateAndTime() {
@@ -44,9 +41,8 @@ public class CalendarTest extends base {
 		for(int i = 0; i < sendDate.length; i++) {
 			joiner.add(sendDate[i]);
 		}
-		String str = joiner.toString();
 
-		cp.input.sendKeys(str);
+		cp.input.sendKeys(joiner.toString());
 		cp.input.sendKeys(Keys.ENTER);
 	}
 
