@@ -39,6 +39,14 @@ public class base {
 		 Actions actions = new Actions(driver);
 		 actions.doubleClick(element).perform();
 	}
+	public static void hoverOverOnElement(WebDriver driver, WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).perform();
+	}
+	public static void clickAndHoldOnElement(WebDriver driver, WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.clickAndHold().perform();
+	}
 	public static String getTextFromElement (WebDriver driver, WebElement el) {
 		return el.getText();
 	}
