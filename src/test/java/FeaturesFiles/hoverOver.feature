@@ -1,7 +1,7 @@
 @SmokeFeature
 Feature: Verify Hover Over functionality
 
-  @smoke2
+  @smoke
   Scenario: Hover over on button and get text
 
     Given I navigate to "https://demoqa.com/menu"
