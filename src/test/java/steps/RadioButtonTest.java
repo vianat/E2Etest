@@ -1,10 +1,9 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

@@ -1,4 +1,4 @@
-package pageObjects;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,10 +8,10 @@ import resources.base;
 
 public class AlertPage extends base{
 	
-	@FindBy(xpath = "//button[@id='alertButton']") public WebElement alertBtn;
-	@FindBy(xpath = "//button[@id='timerAlertButton']") public WebElement timerBtn;
-	@FindBy(xpath = "//button[@id='confirmButton']") public WebElement confirmBtn;
-	@FindBy(xpath = "//button[@id='promtButton']") public WebElement promtBtn;
+	@FindBy(id = "alertButton") public WebElement alertBtn;
+	@FindBy(id = "timerAlertButton") public WebElement timerBtn;
+	@FindBy(id = "confirmButton") public WebElement confirmBtn;
+	@FindBy(id = "promtButton") public WebElement promtBtn;
 	
 	public AlertPage(WebDriver driver) {
 		driver = base.driver;

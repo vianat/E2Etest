@@ -1,23 +1,21 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.Test;
-import pageObjects.ButtonsPage;
+import pages.ButtonsPage;
 import resources.base;
 
 public class ActionsTest extends base {
 	
 	ButtonsPage bp = new ButtonsPage(driver);
-	
-	@Test
+
 	@Given("I navigate to {string}")
 	public void I_navigate_to(String string) throws InterruptedException {
 		base.navigateTo(driver, string);
 	}
-	
+
 	@And("Do {string} click on the {string} button")
 	public void do_click_on_the_button(String string, String string2) throws InterruptedException {
 
@@ -31,7 +29,7 @@ public class ActionsTest extends base {
 			doubleClickOnElement(driver, bp.doubleClickBtn);
 		}
 	}
-	
+
 	@Then("Verify that {string} messege {string} is present")
 	public void verify_that_messege_is_present(String string, String string2) {
 		

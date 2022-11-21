@@ -1,11 +1,11 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
-import org.testng.annotations.Test;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageObjects.Check_boxPage;
+import pages.Check_boxPage;
 import resources.base;
 
 public class CheckboxTest extends base {
