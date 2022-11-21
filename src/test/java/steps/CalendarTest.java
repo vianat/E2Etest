@@ -1,11 +1,10 @@
-package StepDefinitions;
+package steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Keys;
-import org.testng.annotations.Test;
-import pageObjects.CalendarPage;
+import pages.CalendarPage;
 import resources.base;
 import java.util.Calendar;
 import java.util.Date;

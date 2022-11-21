@@ -1,4 +1,4 @@
-package StepDefinitions;
+package steps;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +14,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import resources.base;
 
 public class Hooks extends base {
@@ -22,40 +24,37 @@ public class Hooks extends base {
 	public void start() throws IOException {
 
 		Properties prop = new Properties();
+		System.setProperty("webdriver.chrome.whitelistedIps", "");
 		String dir = System.getProperty("user.home");
-		FileInputStream fis = new FileInputStream(
-				dir + "/eclipse-workspace/E2Etest/src/test/java/resources/data.properties");
-		prop.load(fis);
+		prop.load(new FileInputStream(
+				dir + "/IdeaProjects/E2Etest/src/test/java/resources/data.properties"));
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
 
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--log-level=3");
+//			options.addArguments("--log-level=3");
 //			options.addArguments("--silent");
 			options.addArguments("--headless");
-			WebDriverManager.chromedriver().setup();
 
-//			run without UIgi
+//			run without UI
 			if (browserName.contains("headless")) {
 				options.addArguments("headless");
 			}
 
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver(options);
-			driver.manage().deleteAllCookies();
-			driver.manage().window().maximize();
 
-//		} else if (browserName.equals("firefox")) {
-//			System.setProperty("webdriver.gecko.driver",
-//			System.getProperty("user.dir")+"\\drivers\\geckodriver-v0.31.0-win64.exe");
-//			driver = new FirefoxDriver();
-//			
-//		} else if (browserName.equals("edge")) {
-//			System.setProperty("webdriver.edge.driver",
-//			System.getProperty("user.dir")+"\\E2EProject\\drivers\\msedgedriver104.exe");
-//			driver = new EdgeDriver();
-//		}
+		} else if (browserName.equals("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+
+		} else if (browserName.equals("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 		}
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
 	}
 
 	@After

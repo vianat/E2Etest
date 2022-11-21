@@ -1,13 +1,12 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import pageObjects.AlertPage;
+import pages.AlertPage;
 import resources.base;
 
 public class AlertTest extends base {
@@ -46,12 +45,14 @@ public class AlertTest extends base {
 	}
 
 	@Then("Accept the alert")
-	public void accept_the_alert() {
+	public void accept_the_alert() throws InterruptedException {
 		driver.switchTo().alert().accept();
+		Thread.sleep(300);
 	}
 
 	@Then("Decline the alert")
-	public void decline_the_alert() {
+	public void decline_the_alert() throws InterruptedException {
 		driver.switchTo().alert().dismiss();
+		Thread.sleep(300);
 	}
 }

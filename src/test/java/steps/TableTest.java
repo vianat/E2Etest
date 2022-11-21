@@ -1,11 +1,10 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;
-import org.testng.annotations.Test;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import pageObjects.TablePage;
+import pages.TablePage;
 import resources.base;
 
 public class TableTest extends base {

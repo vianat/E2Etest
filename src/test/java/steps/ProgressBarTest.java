@@ -1,13 +1,9 @@
-package StepDefinitions;
+package steps;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.testng.annotations.Test;
-import pageObjects.ProgressBarPage;
+import pages.ProgressBarPage;
 import resources.base;
-
-import java.time.Duration;
 
 public class ProgressBarTest extends base {
 

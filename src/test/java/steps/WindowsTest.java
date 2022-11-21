@@ -1,15 +1,14 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import java.util.ArrayList;
 import org.openqa.selenium.By;
-import org.testng.annotations.Test;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import pageObjects.WindowsPage;
+import pages.WindowsPage;
 import resources.base;
 
 public class WindowsTest extends base {

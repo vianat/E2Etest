@@ -1,11 +1,10 @@
-package StepDefinitions;
+package steps;
 
 import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;
-import org.testng.annotations.Test;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import pageObjects.Text_boxPage;
+import pages.Text_boxPage;
 import resources.base;
 
 public class TextBoxTest extends base {
