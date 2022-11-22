@@ -25,9 +25,9 @@ public class Hooks extends base {
 
 		Properties prop = new Properties();
 		System.setProperty("webdriver.chrome.whitelistedIps", "");
-		String dir = System.getProperty("user.home");
+		String dir = System.getProperty("user.dir");
 		prop.load(new FileInputStream(
-				dir + "/IdeaProjects/E2Etest/src/test/java/resources/data.properties"));
+				dir + "/src/test/java/resources/data.properties"));
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
