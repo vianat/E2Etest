@@ -1,6 +1,6 @@
 package api.pojo;
 
-public class LoginResponse {
+public class LoginRESP {
     private static String  token;
     private String userId;
     private String message;

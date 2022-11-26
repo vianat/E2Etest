@@ -1,15 +1,14 @@
 package api;
 
-import api.pojo.AddProductResponse;
-import api.pojo.LoginRequest;
-import api.pojo.LoginResponse;
+import api.pojo.*;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 
-import javax.imageio.ImageIO;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,35 +18,36 @@ public class API_BASE {
         final String token;
         String userId;
         String productId;
+        String ordersId;
         String dir = System.getProperty("user.dir");
 
         // Authorization
 
-        RequestSpecification REQ = new RequestSpecBuilder()
-                                        .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
-                                        .setContentType(ContentType.JSON)
-                                        .build();
+        RequestSpecification loginSPEC = new RequestSpecBuilder()
+                                                .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
+                                                .setContentType(ContentType.JSON)
+                                                .build();
 
-        LoginRequest payLoad = new LoginRequest();
-        payLoad.setUserEmail("nik.seey87@mail.ru");
-        payLoad.setUserPassword("3LuvREk3M7GKe@n");
+        LoginREQ loginPayload = new LoginREQ();
+        loginPayload.setUserEmail("nik.seey87@mail.ru");
+        loginPayload.setUserPassword("3LuvREk3M7GKe@n");
 
-        RequestSpecification reqLogin = given().log().all().spec(REQ).body(payLoad);
+        RequestSpecification loginREQ = given().log().all().spec(loginSPEC).body(loginPayload);
 
-        LoginResponse loginResponse = reqLogin
-                                        .when().post("/auth/login")
-                                        .then().log().all().extract().response().as(LoginResponse.class);
-        userId = loginResponse.getUserId();
-        token = loginResponse.getToken();
+        LoginRESP loginRESP = loginREQ
+                                .when().post("/auth/login")
+                                .then().log().all().extract().response().as(LoginRESP.class);
+
+        userId = loginRESP.getUserId();
+        token = loginRESP.getToken();
 
 
         // Add product
 
-
         RequestSpecification addProductSPEC = new RequestSpecBuilder()
-                .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
-                .addHeader("authorization", token)
-                .build();
+                                                    .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
+                                                    .addHeader("authorization", token)
+                                                    .build();
 
         RequestSpecification addProductREQ = given().log().all().spec(addProductSPEC)
                 .params("productCategory", "fashion")
@@ -59,18 +59,46 @@ public class API_BASE {
                 .params("productFor", "women")
                 .multiPart("productImage", new File(dir + "/src/test/java/api/attachment.png"));
 // use pojo
-//        AddProductResponse addProductResponse = addProductREQ
+//        AddProductResponse addProductRESP = addProductREQ
 //                .when().post("/product/add-product")
-//                .then().log().all().extract().response().as(AddProductResponse.class);
-//        productId = addProductResponse.getProductId();
+//                .then().log().all().extract().response().as(AddProductRESP.class);
+//        productId = addProductRESP.getProductId();
 
 // as string
-        String addProductResponse = addProductREQ
-                .when().post("/product/add-product")
-                .then().log().all().extract().response().asString();
+        String addProductRESP = addProductREQ
+                                    .when().post("/product/add-product")
+                                    .then().log().all().extract().response().asString();
 
-        JsonPath js = new JsonPath(addProductResponse);
-
+        JsonPath js = new JsonPath(addProductRESP);
         productId = js.getString("productId");
+
+
+    // Create order
+
+        RequestSpecification createOrderSPEC = new RequestSpecBuilder()
+                                                        .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
+                                                        .addHeader("authorization", token)
+                                                        .setContentType(ContentType.JSON)
+                                                        .build();
+
+        Orders createOrderPayload = new Orders();
+        Order order = new Order();
+        List<Order> orderList = new ArrayList<>();
+
+        order.setCountry("Fuflandia");
+        order.setProductOrderedId(productId);
+
+        orderList.add(order);
+        createOrderPayload.setOrders(orderList);
+
+        RequestSpecification createOrderREQ = given().log().all().spec(createOrderSPEC).body(createOrderPayload);
+
+        String createOrderRESP = createOrderREQ
+                                    .when().post("/order/create-order")
+                                    .then().log().all().extract().response().asString();
+
+        js = new JsonPath(createOrderRESP);
+        ordersId = js.getString("ordersId");
+
     }
 }   

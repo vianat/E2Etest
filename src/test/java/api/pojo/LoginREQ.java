@@ -1,6 +1,6 @@
 package api.pojo;
 
-public class LoginRequest {
+public class LoginREQ {
     private String  userEmail;
     private String userPassword;
 

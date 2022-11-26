@@ -1,6 +1,6 @@
 package api.pojo;
 
-public class AddProductResponse {
+public class AddProductRESP {
     private String productId;
     private String message;
 
