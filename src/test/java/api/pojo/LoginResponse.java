@@ -1,11 +1,11 @@
 package api.pojo;
 
 public class LoginResponse {
-    private String  token;
+    private static String  token;
     private String userId;
     private String message;
 
-    public String getToken() {
+    public static String getToken() {
         return token;
     }
 
