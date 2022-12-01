@@ -1,8 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>E2Etes</groupId>
-	<artifactId>E2Etest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>E2E</groupId>
+	<artifactId>E2E</artifactId>
+	<version>0.1.1-fufel</version>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+		<maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cucumber.version>7.9.0</cucumber.version>
+		<selenium.version>4.6.0</selenium.version>
+		<testng.version>7.6.1</testng.version>
+		<webdrivermanager.version>5.3.1</webdrivermanager.version>
+		<junit.jupiter.version>5.9.1</junit.jupiter.version>
+		<junit-platform-runner.version>1.9.1</junit-platform-runner.version>
+		<apache.common.version>2.4</apache.common.version>
+		<projectlombok.version>1.18.24</projectlombok.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-bom</artifactId>
+				<version>${cucumber.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${junit.jupiter.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -10,28 +45,28 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.6.0</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<version>4.6.0</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>5.3.1</version>
+			<version>${webdrivermanager.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.6.1</version>
+			<version>${testng.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -39,14 +74,14 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>7.9.0</version>
+			<version>${cucumber.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>7.9.0</version>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -54,23 +89,23 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
-			<version>7.9.0</version>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter-api</artifactId>
-		    <version>5.9.1</version>
-		    <scope>test</scope>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
 		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-runner</artifactId>
-			<version>1.9.1</version>
+			<version>${junit-platform-runner.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -78,7 +113,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.9.1</version>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -88,20 +123,20 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.11.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		    <version>2.0.3</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.5</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-simple</artifactId>
-		    <version>2.0.4</version>
-		    <scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>2.0.5</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
@@ -122,7 +157,7 @@
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.10.1</version>
+			<version>${maven.compiler.plugin.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
@@ -183,16 +218,7 @@
 			<version>2.14.1</version>
 		</dependency>
 
-
-
-
-
 	</dependencies>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
 
 	<build>
 		<plugins>
@@ -223,27 +249,6 @@
 							</properties>
 					</configuration>
 				</plugin>
-
-<!--				<plugin>-->
-<!--					<groupId>org.apache.maven.plugins</groupId>-->
-<!--					<artifactId>maven-failsafe-plugin</artifactId>-->
-<!--					<version>3.0.0-M7</version>-->
-<!--					<executions>-->
-<!--						<execution>-->
-<!--							<configuration>-->
-<!--								<includes>-->
-<!--									<include>**/TestRunner.java</include>-->
-<!--								</includes>-->
-<!--								<parallel>methods</parallel>-->
-<!--								<threadCount>4</threadCount>-->
-<!--								&lt;!&ndash;						<useUnlimitedThreads>true</useUnlimitedThreads>&ndash;&gt;-->
-<!--								&lt;!&ndash;						<testFailureIgnore>true</testFailureIgnore>&ndash;&gt;-->
-<!--								<perCoreThreadCount>true</perCoreThreadCount>-->
-<!--							</configuration>-->
-<!--						</execution>-->
-<!--					</executions>-->
-<!--				</plugin>-->
-
 		</plugins>
 	</build>
 
