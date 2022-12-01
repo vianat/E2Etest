@@ -15,6 +15,6 @@ import io.cucumber.junit.CucumberOptions;
 											"json:target/JsonReports/report.json",
 											"junit:target/JunitReports/report.xml"},
 
-tags="@smoke")
+tags="@api")
 public class TestRunner {
 }

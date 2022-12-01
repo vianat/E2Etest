@@ -1,73 +1,69 @@
 package api;
 
 import api.pojo.*;
+import api.resources.PayloadBuilder;
+import api.resources.Utils;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class API_BASE {
-    public static void main(String[] args) {
+public class API_BASE extends Utils {
+    public static void main(String[] args) throws FileNotFoundException {
 
         final String token;
         String userId;
         String productId;
         String ordersId;
         String dir = System.getProperty("user.dir");
+        PayloadBuilder payload = new PayloadBuilder();
 
         // Authorization
 
-        RequestSpecification loginSPEC = new RequestSpecBuilder()
-                .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
-                .setContentType(ContentType.JSON)
-                .build();
-
-        LoginREQ loginPayload = new LoginREQ();
-        loginPayload.setUserEmail("nik.seey87@mail.ru");
-        loginPayload.setUserPassword("3LuvREk3M7GKe@n");
-
-        RequestSpecification loginREQ = given().relaxedHTTPSValidation().log().all().spec(loginSPEC).body(loginPayload);
+        RequestSpecification loginREQ = given().relaxedHTTPSValidation()
+                .spec(login_SPEC("https://rahulshettyacademy.com/api/ecom/"))
+                .body(payload.loginPayload("nik.seey87@mail.ru", "3LuvREk3M7GKe@n"));
 
         LoginRESP loginRESP = loginREQ
                 .when().post("/auth/login")
-                .then().log().all().extract().response().as(LoginRESP.class);
+                .then().extract().response().as(LoginRESP.class);
 
         userId = loginRESP.getUserId();
         token = loginRESP.getToken();
 
+        RequestSpecification SPEC = SPEC_with_auth_token_and_JSON(token);
+        RequestSpecification SPECnoJSON = SPEC_with_auth_token_no_JSON(token);
+
 
         // Add product
 
-        RequestSpecification addProductSPEC = new RequestSpecBuilder()
-                .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
-                .addHeader("authorization", token)
-                .build();
-
-        RequestSpecification addProductREQ = given().log().all().spec(addProductSPEC)
+        RequestSpecification addProductREQ = given().spec(SPECnoJSON)
                 .params("productCategory", "fashion")
                 .params("productName", "fufel")
                 .params("productAddedBy", userId)
                 .params("productSubCategory", "shirts")
                 .params("productPrice", "100500")
-                .params("productDescription", "Addias Originals")
+                .params("productDescription", "Abibas Uriginals")
                 .params("productFor", "women")
                 .multiPart("productImage", new File(dir + "/src/test/java/api/attachment.png"));
-// use pojo
+
+// use pojo deserialization
 //        AddProductResponse addProductRESP = addProductREQ
 //                .when().post("/product/add-product")
 //                .then().log().all().extract().response().as(AddProductRESP.class);
 //        productId = addProductRESP.getProductId();
 
-// as string
+// or string
         String addProductRESP = addProductREQ
                 .when().post("/product/add-product")
-                .then().log().all().extract().response().asString();
+                .then().extract().response().asString();
 
         JsonPath js = new JsonPath(addProductRESP);
         productId = js.getString("productId");
@@ -75,27 +71,11 @@ public class API_BASE {
 
     // Create order
 
-        RequestSpecification SPEC = new RequestSpecBuilder()
-                .setBaseUri("https://rahulshettyacademy.com/api/ecom/")
-                .addHeader("authorization", token)
-                .setContentType(ContentType.JSON)
-                .build();
-
-        Orders createOrderPayload = new Orders();
-        Order order = new Order();
-        List<Order> orderList = new ArrayList<>();
-
-        order.setCountry("Fuflandia");
-        order.setProductOrderedId(productId);
-
-        orderList.add(order);
-        createOrderPayload.setOrders(orderList);
-
-        RequestSpecification createOrderREQ = given().log().all().spec(SPEC).body(createOrderPayload);
+        RequestSpecification createOrderREQ = given().spec(SPEC).body(payload.createOrderPayload(productId));
 
         String createOrderRESP = createOrderREQ
                 .when().post("/order/create-order")
-                .then().log().all().extract().response().asString();
+                .then().extract().response().asString();
 
         js = new JsonPath(createOrderRESP);
         ordersId = js.getString("orders");
@@ -104,19 +84,17 @@ public class API_BASE {
 
         // Get order
 
-        RequestSpecification getOrderREQ = given().log().all().spec(SPEC);
+        RequestSpecification getOrderREQ = given().spec(SPEC);
 
         String getOrderRESP = getOrderREQ
                 .when().get("/order/get-orders-details?id=" + ordersId)
-                .then().log().all().extract().response().asString();
+                .then().extract().response().asString();
 
 
         // Delete product
 
-        RequestSpecification deleteProductREQ = given().log().all().spec(SPEC).pathParams("productId", productId);
+        RequestSpecification deleteProductREQ = given().spec(SPEC).pathParams("productId", productId);
 
-        deleteProductREQ
-                .when().delete("product/delete-product/{productId}")
-                .then().log().all();
+        deleteProductREQ.when().delete("product/delete-product/{productId}");
     }
 }   
