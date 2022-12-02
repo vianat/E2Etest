@@ -10,13 +10,14 @@ import io.restassured.specification.RequestSpecification;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
 public class API_BASE extends Utils {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         final String token;
         String userId;
@@ -28,7 +29,7 @@ public class API_BASE extends Utils {
         // Authorization
 
         RequestSpecification loginREQ = given().relaxedHTTPSValidation()
-                .spec(login_SPEC("https://rahulshettyacademy.com/api/ecom/"))
+                .spec(login_SPEC())
                 .body(payload.loginPayload("nik.seey87@mail.ru", "3LuvREk3M7GKe@n"));
 
         LoginRESP loginRESP = loginREQ
@@ -38,8 +39,9 @@ public class API_BASE extends Utils {
         userId = loginRESP.getUserId();
         token = loginRESP.getToken();
 
-        RequestSpecification SPEC = SPEC_with_auth_token_and_JSON(token);
-        RequestSpecification SPECnoJSON = SPEC_with_auth_token_no_JSON(token);
+
+        RequestSpecification SPEC = SPEC_token_and_JSON(token);
+        RequestSpecification SPECnoJSON = SPEC_token(token);
 
 
         // Add product
