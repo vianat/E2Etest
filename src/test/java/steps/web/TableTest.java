@@ -1,4 +1,4 @@
-package steps;
+package steps.web;
 
 import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;

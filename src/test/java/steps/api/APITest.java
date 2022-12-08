@@ -82,8 +82,6 @@ public class APITest {
                         .params("productFor", "women")
                         .multiPart("productImage", new File(dir + "/src/test/java/api/attachment.png"));
 
-                System.out.println("--------------");
-
                 addProductRESP = addProductREQ
                         .when().post(endpoints.getEndpoint())
                         .then().extract().response().asString();

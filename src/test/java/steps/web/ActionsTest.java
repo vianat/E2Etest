@@ -1,4 +1,4 @@
-package steps;
+package steps.web;
 
 import static org.testng.Assert.assertEquals;
 import io.cucumber.java.en.And;
