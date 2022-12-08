@@ -14,7 +14,7 @@ public class Utils {
 
     static {
         try {
-            log = new PrintStream(new FileOutputStream("api-log.txt", true));
+            log = new PrintStream(new FileOutputStream("api-log.txt"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
