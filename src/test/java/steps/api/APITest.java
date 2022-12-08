@@ -2,20 +2,16 @@ package steps.api;
 
 import api.pojo.LoginRESP;
 import api.resources.Endpoints;
-import api.resources.IBuilderEnhancer;
 import api.resources.PayloadBuilder;
-import api.resources.REQEnhancer;
+import api.resources.Utils;
+import api.resources.fabrics.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
-
 import java.io.File;
 import java.io.IOException;
-
 import static api.resources.Utils.*;
 import static io.restassured.RestAssured.given;
 import static org.testng.AssertJUnit.assertEquals;
@@ -23,7 +19,8 @@ import static org.testng.AssertJUnit.assertEquals;
 public class APITest {
 
     RequestSpecification addProductREQ;
-    static REQEnhancer enhancer;
+    static IRequestSpecificationBuilder jsonSpecBuilder;
+    static IRequestSpecificationBuilder specBuilder;
     static String userId;
     static String productId;
     static String ordersId;
@@ -35,17 +32,20 @@ public class APITest {
     PayloadBuilder payload = new PayloadBuilder();
     LoginRESP loginRESP;
     JsonPath js;
-    IBuilderEnhancer authEnhancer;
+
 
     // Authentifications
+
             @Given("Send POST request to baseUrl and {string} endpoint with payload: {string} and {string}")
             public void send_POST_request_with_payload(String endpoint, String email, String pass) throws IOException {
 
                 Endpoints endpoints = Endpoints.valueOf(endpoint);
 
+                IRequestSpecificationBuilder loginSpecBuilder = new DefaultRequestSpecificationBuilder(Utils.getGlobalProp("url"));
+
                 RequestSpecification loginREQ = given()
                         .relaxedHTTPSValidation()
-                        .spec(login_SPEC())
+                        .spec(loginSpecBuilder.createSPEC())
                         .body(payload.loginPayload(email, pass));
 
                 loginRESP = loginREQ
@@ -55,14 +55,22 @@ public class APITest {
 
                 responseMessage = loginRESP.getMessage();
             }
+
             @When("Verify that response message is {string}")
             public void verify_that_response_message_is(String expected) {
                 assertEquals(responseMessage, expected);
             }
+
             @And("Get UserId and token from response")
-            public void get_UserId_and_token_from_response() {
+            public void get_UserId_and_token_from_response() throws IOException {
                 userId = loginRESP.getUserId();
-                enhancer = new REQEnhancer(loginRESP.getToken());
+
+                var specBuilderSup = BaseRequestSpecificationBuilder.buildSpecBuilderSupplier(
+                        getGlobalProp("url"),
+                        loginRESP.getToken());
+
+                jsonSpecBuilder = specBuilderSup.apply(JsonSpecReqBuilder::new);
+                specBuilder = specBuilderSup.apply(SpecReqBuilder::new);
             }
 
     // create product
@@ -72,7 +80,7 @@ public class APITest {
 
                 Endpoints endpoints = Endpoints.valueOf(endpoint);
 
-                addProductREQ = given().spec(enhanceSPEC(enhancer::authEnhancerDefault))
+                addProductREQ = given().spec(specBuilder.createSPEC())
                         .params("productCategory", "fashion")
                         .params("productName", "fufel")
                         .params("productAddedBy", userId)
@@ -91,6 +99,7 @@ public class APITest {
                 js = new JsonPath(addProductRESP);
                 responseMessage = js.getString("message");
             }
+
             @When("Get productId from response")
             public void get_product_id_from_response() {
                 js = new JsonPath(addProductRESP);
@@ -98,14 +107,15 @@ public class APITest {
             }
 
     // create order
+
             @Given("Send POST request to baseUrl and {string} endpoint")
             public void send_POST_request_to_baseUrl_and_endpoint(String endpoint) throws IOException {
 
                 Endpoints endpoints = Endpoints.valueOf(endpoint);
 
-                RequestSpecification SPECWithJSON = enhanceSPEC(enhancer::authEnhancerWithJSON);
 
-                RequestSpecification createOrderREQ = given().spec(SPECWithJSON).body(payload.createOrderPayload(productId));
+                RequestSpecification createOrderREQ = given().spec(jsonSpecBuilder.createSPEC())
+                        .body(payload.createOrderPayload(productId));
 
                 createOrderRESP = createOrderREQ
                         .when().post(endpoints.getEndpoint())
@@ -114,6 +124,7 @@ public class APITest {
                 js = new JsonPath(createOrderRESP);
                 responseMessage = js.getString("message");
             }
+
             @When("Get ordersId from response")
             public void get_orders_id_from_response() {
                 js = new JsonPath(createOrderRESP);
@@ -122,14 +133,13 @@ public class APITest {
             }
 
     // get order info
+
             @Given("Send GET request to baseUrl and {string} endpoint")
             public void send_get_request_to_base_url_and_endpoint(String endpoint) throws IOException {
 
                 Endpoints endpoints = Endpoints.valueOf(endpoint);
 
-                RequestSpecification SPECWithJSON = enhanceSPEC(enhancer::authEnhancerWithJSON);
-
-                RequestSpecification getOrderREQ = given().spec(SPECWithJSON);
+                RequestSpecification getOrderREQ = given().spec(jsonSpecBuilder.createSPEC());
 
                 getOrderRESP = getOrderREQ
                         .when().get(""+endpoints.getEndpoint()+ ordersId)
@@ -140,14 +150,13 @@ public class APITest {
             }
 
     // delete product
+
             @Given("Send DELETE request to baseUrl and {string} endpoint")
             public void send_delete_request_to_base_url_and_endpoint(String endpoint) throws IOException {
 
                 Endpoints endpoints = Endpoints.valueOf(endpoint);
 
-                RequestSpecification SPECWithJSON = enhanceSPEC(enhancer::authEnhancerWithJSON);
-
-                RequestSpecification deleteProductREQ = given().spec(SPECWithJSON).pathParams("productId", productId);
+                RequestSpecification deleteProductREQ = given().spec(jsonSpecBuilder.createSPEC()).pathParams("productId", productId);
 
                 String deleteProductRESP = deleteProductREQ
                         .when().delete(""+endpoints.getEndpoint()+"{productId}")

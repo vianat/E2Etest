@@ -3,22 +3,18 @@ package api;
 import api.pojo.*;
 import api.resources.PayloadBuilder;
 import api.resources.Utils;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.ContentType;
+import api.resources.fabrics.DefaultRequestSpecificationBuilder;
+import api.resources.fabrics.IRequestSpecificationBuilder;
+import api.resources.fabrics.JsonSpecReqBuilder;
+import api.resources.fabrics.SpecReqBuilder;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static io.restassured.RestAssured.given;
 
 public class API_BASE extends Utils {
     public static void main(String[] args) throws IOException {
-
         final String token;
         String userId;
         String productId;
@@ -26,10 +22,11 @@ public class API_BASE extends Utils {
         String dir = System.getProperty("user.dir");
         PayloadBuilder payload = new PayloadBuilder();
 
-        // Authorization
+    // Authorization
+        IRequestSpecificationBuilder loginSpecBuilder = new DefaultRequestSpecificationBuilder(Utils.getGlobalProp("url"));
 
         RequestSpecification loginREQ = given().relaxedHTTPSValidation()
-                .spec(login_SPEC())
+                .spec(loginSpecBuilder.createSPEC())
                 .body(payload.loginPayload("nik.seey87@mail.ru", "3LuvREk3M7GKe@n"));
 
         LoginRESP loginRESP = loginREQ
@@ -39,14 +36,13 @@ public class API_BASE extends Utils {
         userId = loginRESP.getUserId();
         token = loginRESP.getToken();
 
+        JsonSpecReqBuilder jsonSpecBuilder = new JsonSpecReqBuilder(Utils.getGlobalProp("url"), loginRESP.getToken());
+        SpecReqBuilder specBuilder = new SpecReqBuilder(Utils.getGlobalProp("url"), loginRESP.getToken());
 
-        RequestSpecification SPEC = SPEC_token_and_JSON(token);
-        RequestSpecification SPECnoJSON = SPEC_token(token);
 
+    // Add product
 
-        // Add product
-
-        RequestSpecification addProductREQ = given().spec(SPECnoJSON)
+        RequestSpecification addProductREQ = given().spec(specBuilder.createSPEC())
                 .params("productCategory", "fashion")
                 .params("productName", "fufel")
                 .params("productAddedBy", userId)
@@ -73,7 +69,7 @@ public class API_BASE extends Utils {
 
     // Create order
 
-        RequestSpecification createOrderREQ = given().spec(SPEC).body(payload.createOrderPayload(productId));
+        RequestSpecification createOrderREQ = given().spec(jsonSpecBuilder.createSPEC()).body(payload.createOrderPayload(productId));
 
         String createOrderRESP = createOrderREQ
                 .when().post("/order/create-order")
@@ -86,7 +82,7 @@ public class API_BASE extends Utils {
 
         // Get order
 
-        RequestSpecification getOrderREQ = given().spec(SPEC);
+        RequestSpecification getOrderREQ = given().spec(jsonSpecBuilder.createSPEC());
 
         String getOrderRESP = getOrderREQ
                 .when().get("/order/get-orders-details?id=" + ordersId)
@@ -95,7 +91,7 @@ public class API_BASE extends Utils {
 
         // Delete product
 
-        RequestSpecification deleteProductREQ = given().spec(SPEC).pathParams("productId", productId);
+        RequestSpecification deleteProductREQ = given().spec(jsonSpecBuilder.createSPEC()).pathParams("productId", productId);
 
         deleteProductREQ.when().delete("product/delete-product/{productId}");
     }
